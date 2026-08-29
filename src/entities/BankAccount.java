@@ -1,13 +1,13 @@
 package entities;
 
-public class BankAccount {
+public abstract class BankAccount {
 
     private int number;
     private String holder;
     private double balance;
-    private double withdrawalFee = 5.0;
 
-
+    public BankAccount(){
+    }
     public BankAccount(int number, String holder){
         this.number = number;
         this.holder = holder;
@@ -29,15 +29,12 @@ public class BankAccount {
         return false;
     }
 
+     protected void debit(double amount){
+        balance -= amount;
+    }
 
-    public boolean withdraw( double amount ) {
-        if ( amount > 0 && balance >= amount + withdrawalFee){
-            balance = balance - amount - withdrawalFee;
-            return true;
-        }
-        return false;
-      }
 
+    public abstract boolean withdraw( double amount );
 
     public String getHolder() {
         return holder;
