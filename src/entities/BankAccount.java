@@ -29,7 +29,7 @@ public abstract class BankAccount {
         return false;
     }
 
-     protected void debit(double amount){
+    protected void debit(double amount){
         balance -= amount;
     }
 
