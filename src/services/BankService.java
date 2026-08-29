@@ -1,9 +1,7 @@
 package services;
 import entities.BankAccount;
-
 import java.util.ArrayList;
 import java.util.List;
-
 
 public class BankService {
 
@@ -22,8 +20,10 @@ public class BankService {
     public boolean addAccount(BankAccount account){
         if(findAccountByNumber(account.getNumber()) != null){
             return false;
+        } else if (account.hasValidInitialDeposit() != true){
+            return false;
         }else{
-            accounts.add(account);
+        accounts.add(account);
                 return true;
             }
         }

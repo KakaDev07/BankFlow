@@ -10,6 +10,14 @@ public class SavingsAccount extends BankAccount{
     }
 
     @Override
+    public boolean hasValidInitialDeposit(){
+        if(getBalance() >= 200) {
+            return true;
+        }
+        return false;
+    }
+
+    @Override
     public boolean withdraw(double amount) {
         if(amount > 0 && getBalance() - amount  >= minimumBalance){
             debit(amount);

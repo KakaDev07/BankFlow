@@ -33,6 +33,7 @@ public abstract class BankAccount {
         balance -= amount;
     }
 
+    public abstract  boolean hasValidInitialDeposit();
 
     public abstract boolean withdraw( double amount );
 
@@ -60,3 +61,4 @@ public abstract class BankAccount {
                 ", balance=" + balance +  '}';
     }
 }
+
