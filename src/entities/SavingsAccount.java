@@ -3,6 +3,7 @@ package entities;
 public class SavingsAccount extends BankAccount{
 
     private double minimumBalance = 200.0;
+    private double rate = 0.005;
 
     public SavingsAccount(int number, String holder, double initialDeposit) {
         super(number, holder, initialDeposit);
@@ -16,4 +17,10 @@ public class SavingsAccount extends BankAccount{
         }
         return false;
     }
-}
+    public void applyMonthlyYield(){
+        double interest = getBalance() * rate;
+        deposit(interest);
+        }
+    }
+
+
