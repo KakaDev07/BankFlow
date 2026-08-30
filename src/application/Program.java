@@ -1,5 +1,6 @@
 package application;
 import entities.CheckingAccount;
+import entities.SavingsAccount;
 import services.BankService;
 import ui.Menu;
 import java.util.Scanner;
@@ -24,6 +25,7 @@ public class Program {
 
                     switch (accountType){
                         case 1:
+
                             System.out.print("numero da conta :");
                             int number = sc.nextInt();
                             System.out.print("nome :");
@@ -40,7 +42,19 @@ public class Program {
                             break;
 
                         case 2:
-                            // pupança
+                            System.out.println("numero da conta");
+                            int numberP = sc.nextInt();
+                            System.out.println("nome ");
+                            sc.nextLine();
+                            String nameP = sc.nextLine();
+                            System.out.println("Deposito inicial");
+                            double depositP = sc.nextDouble();
+                            SavingsAccount account1 = new SavingsAccount(numberP, nameP, depositP);
+                            if(service.addAccount(account1)){
+                                System.out.println("Conta criada");
+                            }else{
+                                System.out.println("erro 404 kkkk");
+                            }
                             break;
 
                         case 0:
