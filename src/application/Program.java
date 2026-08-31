@@ -1,4 +1,5 @@
 package application;
+import entities.BankAccount;
 import entities.CheckingAccount;
 import entities.SavingsAccount;
 import services.BankService;
@@ -67,7 +68,15 @@ public class Program {
                     break;
 
                 case 2:
-                    // acessar conta
+                    System.out.println("Digite o numero da conta");
+                    int number = sc.nextInt();
+                    BankAccount foundAccount = service.findAccountByNumber(number);
+                    if(foundAccount != null){
+                        System.out.println(foundAccount);
+                    }else {
+                        System.out.println("Conta nao encontrada");
+                    }
+
                     break;
 
                 case 3:
