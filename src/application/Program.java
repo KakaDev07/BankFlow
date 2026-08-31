@@ -72,7 +72,43 @@ public class Program {
                     int number = sc.nextInt();
                     BankAccount foundAccount = service.findAccountByNumber(number);
                     if(foundAccount != null){
-                        System.out.println(foundAccount);
+                        int escolha;
+                        do{
+                        Menu.menuAccount();
+                        escolha = sc.nextInt();
+
+                        switch (escolha){
+                            case 1:
+                                System.out.println(foundAccount);
+                                break;
+                            case 2:
+                                System.out.print("quanto deseja depositar");
+                                double deposit = sc.nextDouble();
+                                if(foundAccount.deposit(deposit)){
+                                    System.out.println("Deposito realizado");
+                                }else{
+                                    System.out.println("valor invalido");
+                                }
+                                break;
+                            case 3:
+                                System.out.println("Qual valor quer sacar?");
+                                double saque = sc.nextDouble();
+                                if(foundAccount.withdraw(saque)){
+                                    System.out.println("Saque realizado");
+                                }else {
+                                    System.out.println("saque nao realizado");
+                                }
+
+                                break;
+
+                            case 0:
+                                break;
+
+                            default:
+                                System.out.println("Opcao invalida");
+                        }
+
+                        }while (escolha != 0);
                     }else {
                         System.out.println("Conta nao encontrada");
                     }
