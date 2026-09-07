@@ -55,10 +55,21 @@ public abstract class BankAccount {
 
     @Override
     public String toString() {
-        return "BankAccount{" +
-                "number=" + number +
-                ", holder='" + holder + '\'' +
-                ", balance=" + balance +  '}';
+        return String.format(
+                """
+                
+                ===== ACCOUNT STATEMENT =====
+                Account type: %s
+                Account number: %d
+                Account holder: %s
+                Current balance: $%.2f
+                =============================
+                """,
+                getClass().getSimpleName(),
+                number,
+                holder,
+                balance
+        );
     }
 }
 

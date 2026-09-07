@@ -36,7 +36,7 @@ public class Program {
                             sc.nextLine();
                             String name = sc.nextLine();
 
-                            System.out.print("Initial deposit: $");
+                            System.out.print("Initial deposit: R$ ");
                             double deposit = sc.nextDouble();
 
                             CheckingAccount account =
@@ -58,7 +58,7 @@ public class Program {
                             sc.nextLine();
                             String savingsHolder = sc.nextLine();
 
-                            System.out.print("Initial deposit: $");
+                            System.out.print("Initial deposit: R$ ");
                             double savingsDeposit = sc.nextDouble();
 
                             SavingsAccount savingsAccount =
@@ -100,7 +100,7 @@ public class Program {
                                     break;
 
                                 case 2:
-                                    System.out.print("Deposit amount: $");
+                                    System.out.print("Deposit amount: R$ ");
                                     double deposit = sc.nextDouble();
 
                                     if (foundAccount.deposit(deposit)) {
@@ -111,7 +111,7 @@ public class Program {
                                     break;
 
                                 case 3:
-                                    System.out.print("Withdrawal amount: $");
+                                    System.out.print("Withdrawal amount: R$ ");
                                     double withdrawal = sc.nextDouble();
 
                                     if (foundAccount.withdraw(withdrawal)) {
