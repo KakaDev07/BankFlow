@@ -28,5 +28,8 @@ public class BankService {
             }
         }
 
+    public List<BankAccount> getAccounts() {
+        return accounts;
     }
+}
 

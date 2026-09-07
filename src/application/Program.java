@@ -1,135 +1,161 @@
 package application;
+
 import entities.BankAccount;
 import entities.CheckingAccount;
 import entities.SavingsAccount;
 import services.BankService;
 import ui.Menu;
+
 import java.util.Scanner;
 
 public class Program {
 
-    public static void main (String[] args) {
+    public static void main(String[] args) {
 
         Scanner sc = new Scanner(System.in);
-        int option;
         BankService service = new BankService();
+        int option;
 
-        do{
+        do {
             Menu.showMainMenu();
             option = sc.nextInt();
 
-            switch (option){
+            switch (option) {
                 case 1:
                     int accountType;
+
                     Menu.showAccountTypeMenu();
                     accountType = sc.nextInt();
 
-                    switch (accountType){
+                    switch (accountType) {
                         case 1:
-
-                            System.out.print("numero da conta :");
+                            System.out.print("Account number: ");
                             int number = sc.nextInt();
-                            System.out.print("nome :");
+
+                            System.out.print("Account holder: ");
                             sc.nextLine();
                             String name = sc.nextLine();
-                            System.out.print("deposito inicial");
+
+                            System.out.print("Initial deposit: $");
                             double deposit = sc.nextDouble();
-                            CheckingAccount account = new CheckingAccount(number, name, deposit);
-                            if(service.addAccount(account)){
-                                System.out.println("Conta criada");
-                            }else{
-                                System.out.println("erro 404 kkkk");
+
+                            CheckingAccount account =
+                                    new CheckingAccount(number, name, deposit);
+
+                            if (service.addAccount(account)) {
+                                System.out.println("\nAccount created successfully!");
+                            } else {
+                                System.out.println("\nAccount could not be created.");
+                                System.out.println("Check the account number and initial deposit.");
                             }
                             break;
 
                         case 2:
-                            System.out.println("numero da conta");
-                            int numberP = sc.nextInt();
-                            System.out.println("nome ");
+                            System.out.print("Account number: ");
+                            int savingsNumber = sc.nextInt();
+
+                            System.out.print("Account holder: ");
                             sc.nextLine();
-                            String nameP = sc.nextLine();
-                            System.out.println("Deposito inicial");
-                            double depositP = sc.nextDouble();
-                            SavingsAccount account1 = new SavingsAccount(numberP, nameP, depositP);
-                            if(service.addAccount(account1)){
-                                System.out.println("Conta criada");
-                            }else{
-                                System.out.println("erro 404 kkkk");
+                            String savingsHolder = sc.nextLine();
+
+                            System.out.print("Initial deposit: $");
+                            double savingsDeposit = sc.nextDouble();
+
+                            SavingsAccount savingsAccount =
+                                    new SavingsAccount(savingsNumber, savingsHolder, savingsDeposit);
+
+                            if (service.addAccount(savingsAccount)) {
+                                System.out.println("\nAccount created successfully!");
+                            } else {
+                                System.out.println("\nAccount could not be created.");
+                                System.out.println("Check the account number and initial deposit.");
                             }
                             break;
 
                         case 0:
-                            // voltar
                             break;
 
                         default:
-                            System.out.println("Invalid option");
+                            System.out.println("Invalid option.");
                     }
                     break;
 
                 case 2:
-                    System.out.println("Digite o numero da conta");
-                    int number = sc.nextInt();
-                    BankAccount foundAccount = service.findAccountByNumber(number);
-                    if(foundAccount != null){
-                        int escolha;
-                        do{
-                        Menu.menuAccount();
-                        escolha = sc.nextInt();
+                    System.out.print("Enter the account number: ");
+                    int accountNumber = sc.nextInt();
 
-                        switch (escolha){
-                            case 1:
-                                System.out.println(foundAccount);
-                                break;
-                            case 2:
-                                System.out.print("quanto deseja depositar");
-                                double deposit = sc.nextDouble();
-                                if(foundAccount.deposit(deposit)){
-                                    System.out.println("Deposito realizado");
-                                }else{
-                                    System.out.println("valor invalido");
-                                }
-                                break;
-                            case 3:
-                                System.out.println("Qual valor quer sacar?");
-                                double saque = sc.nextDouble();
-                                if(foundAccount.withdraw(saque)){
-                                    System.out.println("Saque realizado");
-                                }else {
-                                    System.out.println("saque nao realizado");
-                                }
+                    BankAccount foundAccount =
+                            service.findAccountByNumber(accountNumber);
 
-                                break;
+                    if (foundAccount != null) {
+                        int accountOption;
 
-                            case 0:
-                                break;
+                        do {
+                            Menu.menuAccount();
+                            accountOption = sc.nextInt();
 
-                            default:
-                                System.out.println("Opcao invalida");
-                        }
+                            switch (accountOption) {
+                                case 1:
+                                    System.out.println(foundAccount);
+                                    break;
 
-                        }while (escolha != 0);
-                    }else {
-                        System.out.println("Conta nao encontrada");
+                                case 2:
+                                    System.out.print("Deposit amount: $");
+                                    double deposit = sc.nextDouble();
+
+                                    if (foundAccount.deposit(deposit)) {
+                                        System.out.println("Deposit completed successfully!");
+                                    } else {
+                                        System.out.println("Invalid deposit amount.");
+                                    }
+                                    break;
+
+                                case 3:
+                                    System.out.print("Withdrawal amount: $");
+                                    double withdrawal = sc.nextDouble();
+
+                                    if (foundAccount.withdraw(withdrawal)) {
+                                        System.out.println("Withdrawal completed successfully!");
+                                    } else {
+                                        System.out.println("Withdrawal could not be completed.");
+                                    }
+                                    break;
+
+                                case 0:
+                                    break;
+
+                                default:
+                                    System.out.println("Invalid option.");
+                            }
+
+                        } while (accountOption != 0);
+
+                    } else {
+                        System.out.println("Account not found.");
                     }
-
                     break;
 
                 case 3:
-                   // listar contas
+                    if (service.getAccounts().isEmpty()) {
+                        System.out.println("No accounts registered.");
+                    } else {
+                        System.out.println("\n===== REGISTERED ACCOUNTS =====");
+
+                        for (BankAccount account : service.getAccounts()) {
+                            System.out.println(account);
+                        }
+                    }
                     break;
 
                 case 0:
-                    // sair
+                    System.out.println("Closing BankFlow...");
                     break;
 
                 default:
-                    System.out.println("Invalid option");
+                    System.out.println("Invalid option.");
             }
 
         } while (option != 0);
-
-
 
         sc.close();
     }
